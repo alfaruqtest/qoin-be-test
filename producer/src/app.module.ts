@@ -1,17 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import databaseConfig from './database/database.config';
-import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      load: [databaseConfig],
-    }),
     ClientsModule.register([
       {
         name: 'TEST_PRODUCER',
@@ -25,7 +18,6 @@ import { DatabaseModule } from './database/database.module';
         },
       },
     ]),
-    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],

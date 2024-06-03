@@ -47,6 +47,14 @@ export class AppService {
     return `success update test ${id}`;
   }
 
+  async deleteTestByID(id: number): Promise<string> {
+    if (isNaN(id)) throw new NotFoundException();
+
+    await this.db.delete(test01).where(eq(test01.id, id));
+
+    return `success delete test ${id}`;
+  }
+
   getHello(): string {
     return 'Hello World!';
   }

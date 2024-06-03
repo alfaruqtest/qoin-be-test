@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { CreateTestDTO, UpdateTestDTO } from './app.dto';
 import { AppService } from './app.service';
 
@@ -30,6 +39,12 @@ export class AppController {
   @Put('test/:id')
   async updateTestByID(@Param('id') id: number, @Body() body: UpdateTestDTO) {
     const resp = await this.appService.updateTestByID(id, body);
+    return { message: resp };
+  }
+
+  @Delete('test/:id')
+  async deleteTestByID(@Param('id') id: number) {
+    const resp = await this.appService.deleteTestByID(id);
     return { message: resp };
   }
 

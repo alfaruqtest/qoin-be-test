@@ -37,8 +37,8 @@ export class AppController {
   }
 
   @Put('test/:id')
-  async updateTestByID(@Param('id') id: number, @Body() body: UpdateTestDTO) {
-    const resp = await this.appService.updateTestByID(id, body);
+  updateTestByID(@Param('id') id: number, @Body() body: UpdateTestDTO) {
+    const resp = this.appService.updateTestByID(id, body);
     return { message: resp };
   }
 

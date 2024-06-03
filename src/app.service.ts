@@ -41,10 +41,8 @@ export class AppService {
     return tests;
   }
 
-  async updateTestByID(id: number, body: UpdateTestDTO): Promise<string> {
-    if (isNaN(id)) throw new NotFoundException();
-
-    await this.db.update(test01).set(body).where(eq(test01.id, id));
+  updateTestByID(id: number, body: UpdateTestDTO): string {
+    this.rabbit.emit('test-updated', { id: id, data: body });
 
     return `success update test ${id}`;
   }

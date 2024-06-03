@@ -61,7 +61,12 @@ export class AppService {
   }
 
   deleteTestByID(id: number): string {
-    this.rabbit.emit('test-deleted', { id: id });
+    this.rabbit.emit('test-deleted', {
+      command: 'delete',
+      data: {
+        ID: id,
+      },
+    });
 
     return `success delete test ${id}`;
   }

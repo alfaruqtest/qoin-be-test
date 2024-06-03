@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { eq } from 'drizzle-orm';
-import { CreateTestDTO, UpdateTestDTO } from './app.dto';
+import { CreateTestPayload, UpdateTestPayload } from './app.payload';
 import { Test01, test01 } from './app.schema';
 import { DRIZZLE_PROVIDER, DrizzleMaria } from './database/drizzle.provider';
 
@@ -14,18 +14,15 @@ export class AppService {
     private readonly rabbit: ClientProxy,
   ) {}
 
-  async createTest(body: CreateTestDTO) {
-    try {
-      await this.db.insert(test01).values(body);
-    } catch (e) {
-      console.error(e);
-    }
+  async createTest(body: CreateTestPayload) {
+    const test = new CreateTestPayload(body);
+    await this.db.insert(test01).values(test);
   }
 
   async getTestByID(id: number): Promise<Test01> {
     if (isNaN(id)) throw new NotFoundException();
 
-    const [test] = await this.db.select().from(test01).where(eq(test01.id, id));
+    const [test] = await this.db.select().from(test01).where(eq(test01.Id, id));
     if (!test) throw new NotFoundException();
 
     return test;
@@ -44,7 +41,7 @@ export class AppService {
     return tests;
   }
 
-  updateTestByID(id: number, body: UpdateTestDTO): string {
+  updateTestByID(id: number, body: UpdateTestPayload): string {
     this.rabbit.emit('test-updated', { id: id, data: body });
 
     return `success update test ${id}`;

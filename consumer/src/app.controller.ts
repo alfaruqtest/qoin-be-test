@@ -4,21 +4,24 @@ import {
   Delete,
   Get,
   Param,
-  Post,
   Put,
   Query,
 } from '@nestjs/common';
-import { CreateTestDTO, UpdateTestDTO } from './app.dto';
-import { AppService } from './app.service';
 import { EventPattern, Payload } from '@nestjs/microservices';
+import {
+  CreateTestPayload,
+  PayloadTest,
+  UpdateTestPayload,
+} from './app.payload';
+import { AppService } from './app.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @EventPattern('test-created')
-  async handleCreateTest(@Payload() body: CreateTestDTO) {
-    await this.appService.createTest(body);
+  async handleCreateTest(@Payload() payload: PayloadTest<CreateTestPayload>) {
+    await this.appService.createTest(payload.data);
   }
 
   @Get('test/:id')
@@ -37,7 +40,7 @@ export class AppController {
   }
 
   @Put('test/:id')
-  updateTestByID(@Param('id') id: number, @Body() body: UpdateTestDTO) {
+  updateTestByID(@Param('id') id: number, @Body() body: UpdateTestPayload) {
     const resp = this.appService.updateTestByID(id, body);
     return { message: resp };
   }

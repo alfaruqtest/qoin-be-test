@@ -13,3 +13,5 @@ export const test01 = mysqlTable('Test01', {
   created: datetime('created'),
   updated: datetime('updated'),
 });
+
+export type Test01 = typeof test01.$inferSelect;

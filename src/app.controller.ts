@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateTestDTO } from './app.dto';
 import { AppService } from './app.service';
 
@@ -10,6 +10,12 @@ export class AppController {
   async createTest(@Body() body: CreateTestDTO) {
     const resp = await this.appService.createTest(body);
     return { message: resp };
+  }
+
+  @Get('test/:id')
+  async getTestByID(@Param('id') id: number) {
+    const resp = await this.appService.getTestByID(id);
+    return { data: resp };
   }
 
   @Get()

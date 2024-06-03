@@ -47,10 +47,8 @@ export class AppService {
     return `success update test ${id}`;
   }
 
-  async deleteTestByID(id: number): Promise<string> {
-    if (isNaN(id)) throw new NotFoundException();
-
-    await this.db.delete(test01).where(eq(test01.id, id));
+  deleteTestByID(id: number): string {
+    this.rabbit.emit('test-deleted', { id: id });
 
     return `success delete test ${id}`;
   }

@@ -43,8 +43,8 @@ export class AppController {
   }
 
   @Delete('test/:id')
-  async deleteTestByID(@Param('id') id: number) {
-    const resp = await this.appService.deleteTestByID(id);
+  deleteTestByID(@Param('id') id: number) {
+    const resp = this.appService.deleteTestByID(id);
     return { message: resp };
   }
 

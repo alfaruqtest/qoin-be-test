@@ -16,8 +16,8 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Post('test')
-  async createTest(@Body() body: CreateTestDTO) {
-    const resp = await this.appService.createTest(body);
+  createTest(@Body() body: CreateTestDTO) {
+    const resp = this.appService.createTest(body);
     return { message: resp };
   }
 

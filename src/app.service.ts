@@ -1,4 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { eq } from 'drizzle-orm';
 import { CreateTestDTO, UpdateTestDTO } from './app.dto';
 import { Test01, test01 } from './app.schema';
@@ -9,11 +10,12 @@ export class AppService {
   constructor(
     @Inject(DRIZZLE_PROVIDER)
     private readonly db: DrizzleMaria,
+    @Inject('TEST_PRODUCER')
+    private readonly rabbit: ClientProxy,
   ) {}
 
-  async createTest(body: CreateTestDTO): Promise<string> {
-    await this.db.insert(test01).values(body);
-
+  createTest(body: CreateTestDTO): string {
+    this.rabbit.emit('test-created', body);
     return 'success insert new test';
   }
 

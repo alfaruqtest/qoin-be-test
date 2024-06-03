@@ -41,10 +41,9 @@ export class AppService {
     return tests;
   }
 
-  updateTestByID(id: number, body: UpdateTestPayload): string {
-    this.rabbit.emit('test-updated', { id: id, data: body });
-
-    return `success update test ${id}`;
+  async updateTestByID(body: UpdateTestPayload) {
+    const test = new UpdateTestPayload(body);
+    await this.db.update(test01).set(test).where(eq(test01.Id, test.ID));
   }
 
   deleteTestByID(id: number): string {

@@ -20,6 +20,8 @@ export class CreateTestPayload {
 }
 
 export class UpdateTestPayload {
+  ID: number;
+
   Nama: string;
 
   Status: number;

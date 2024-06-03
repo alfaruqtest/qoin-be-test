@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Put,
-  Query,
-} from '@nestjs/common';
+import { Controller, Delete, Get, Param, Query } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import {
   CreateTestPayload,
@@ -39,10 +31,9 @@ export class AppController {
     return { data: resp };
   }
 
-  @Put('test/:id')
-  updateTestByID(@Param('id') id: number, @Body() body: UpdateTestPayload) {
-    const resp = this.appService.updateTestByID(id, body);
-    return { message: resp };
+  @EventPattern('test-updated')
+  async updateTestByID(@Payload() payload: PayloadTest<UpdateTestPayload>) {
+    await this.appService.updateTestByID(payload.data);
   }
 
   @Delete('test/:id')

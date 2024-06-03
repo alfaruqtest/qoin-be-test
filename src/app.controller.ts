@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { CreateTestDTO } from './app.dto';
 import { AppService } from './app.service';
 
@@ -19,8 +19,11 @@ export class AppController {
   }
 
   @Get('test')
-  async getTestList() {
-    const resp = await this.appService.getTestList();
+  async getTestList(
+    @Query('limit') limit: number,
+    @Query('offset') offset: number,
+  ) {
+    const resp = await this.appService.getTestList(limit, offset);
     return { data: resp };
   }
 

@@ -26,8 +26,15 @@ export class AppService {
     return test;
   }
 
-  async getTestList(): Promise<Test01[]> {
-    const tests = await this.db.select().from(test01);
+  async getTestList(limit: number, offset: number): Promise<Test01[]> {
+    if (isNaN(limit)) limit = 20;
+    if (isNaN(offset)) offset = 0;
+
+    const tests = await this.db
+      .select()
+      .from(test01)
+      .limit(limit)
+      .offset(offset);
 
     return tests;
   }

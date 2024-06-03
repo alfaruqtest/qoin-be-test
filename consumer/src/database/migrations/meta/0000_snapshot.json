@@ -1,42 +1,42 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "6030e287-fbe3-46cd-833e-4b0c5b57a490",
+  "id": "00dbd524-8189-4e32-9254-50f7aa52eafc",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "Test01": {
       "name": "Test01",
       "columns": {
-        "id": {
-          "name": "id",
+        "Id": {
+          "name": "Id",
           "type": "int",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": true
         },
-        "name": {
-          "name": "name",
+        "Name": {
+          "name": "Name",
           "type": "varchar(100)",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "status": {
-          "name": "status",
+        "Status": {
+          "name": "Status",
           "type": "smallint",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "created": {
-          "name": "created",
+        "Created": {
+          "name": "Created",
           "type": "datetime",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "updated": {
-          "name": "updated",
+        "Updated": {
+          "name": "Updated",
           "type": "datetime",
           "primaryKey": false,
           "notNull": false,
@@ -46,10 +46,10 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {
-        "Test01_id": {
-          "name": "Test01_id",
+        "Test01_Id": {
+          "name": "Test01_Id",
           "columns": [
-            "id"
+            "Id"
           ]
         }
       },

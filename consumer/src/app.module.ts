@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import appConfig from './app.config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import databaseConfig from './database/database.config';
@@ -9,7 +10,7 @@ import { DatabaseModule } from './database/database.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [databaseConfig],
+      load: [databaseConfig, appConfig],
     }),
     DatabaseModule,
   ],

@@ -15,7 +15,13 @@ export class AppService {
   ) {}
 
   createTest(body: CreateTestDTO): string {
-    this.rabbit.emit('test-created', body);
+    this.rabbit.emit('test-created', {
+      command: 'create',
+      data: {
+        Nama: body.nama,
+        Status: body.status,
+      },
+    });
     return 'success insert new test';
   }
 

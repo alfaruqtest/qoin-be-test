@@ -48,7 +48,14 @@ export class AppService {
   }
 
   updateTestByID(id: number, body: UpdateTestDTO): string {
-    this.rabbit.emit('test-updated', { id: id, data: body });
+    this.rabbit.emit('test-updated', {
+      command: 'update',
+      data: {
+        ID: id,
+        Nama: body.nama,
+        Status: body.status,
+      },
+    });
 
     return `success update test ${id}`;
   }

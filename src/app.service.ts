@@ -26,6 +26,12 @@ export class AppService {
     return test;
   }
 
+  async getTestList(): Promise<Test01[]> {
+    const tests = await this.db.select().from(test01);
+
+    return tests;
+  }
+
   getHello(): string {
     return 'Hello World!';
   }

@@ -18,6 +18,12 @@ export class AppController {
     return { data: resp };
   }
 
+  @Get('test')
+  async getTestList() {
+    const resp = await this.appService.getTestList();
+    return { data: resp };
+  }
+
   @Get()
   getHello(): string {
     return this.appService.getHello();

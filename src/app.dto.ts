@@ -14,3 +14,14 @@ export class CreateTestDTO {
   @Exclude()
   updated = new Date();
 }
+
+export class UpdateTestDTO {
+  @IsNotEmpty()
+  nama: string;
+
+  @IsNotEmpty()
+  status: number;
+
+  @Exclude()
+  updated = new Date();
+}

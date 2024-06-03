@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { eq } from 'drizzle-orm';
-import { CreateTestDTO } from './app.dto';
+import { CreateTestDTO, UpdateTestDTO } from './app.dto';
 import { Test01, test01 } from './app.schema';
 import { DRIZZLE_PROVIDER, DrizzleMaria } from './database/drizzle.provider';
 
@@ -37,6 +37,14 @@ export class AppService {
       .offset(offset);
 
     return tests;
+  }
+
+  async updateTestByID(id: number, body: UpdateTestDTO): Promise<string> {
+    if (isNaN(id)) throw new NotFoundException();
+
+    await this.db.update(test01).set(body).where(eq(test01.id, id));
+
+    return `success update test ${id}`;
   }
 
   getHello(): string {

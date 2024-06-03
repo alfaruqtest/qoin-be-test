@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
-import { CreateTestDTO } from './app.dto';
+import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { CreateTestDTO, UpdateTestDTO } from './app.dto';
 import { AppService } from './app.service';
 
 @Controller()
@@ -25,6 +25,12 @@ export class AppController {
   ) {
     const resp = await this.appService.getTestList(limit, offset);
     return { data: resp };
+  }
+
+  @Put('test/:id')
+  async updateTestByID(@Param('id') id: number, @Body() body: UpdateTestDTO) {
+    const resp = await this.appService.updateTestByID(id, body);
+    return { message: resp };
   }
 
   @Get()

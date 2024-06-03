@@ -7,7 +7,7 @@ import {
   validateSync,
 } from 'class-validator';
 
-class AppEnv {
+export class AppEnv {
   @IsString()
   @IsNotEmpty()
   RABBITMQ_HOST: string;

@@ -33,3 +33,11 @@ export class UpdateTestPayload {
     Object.assign(this, partial);
   }
 }
+
+export class DeleteTestPayload {
+  ID: number;
+
+  constructor(partial?: Partial<UpdateTestPayload>) {
+    Object.assign(this, partial);
+  }
+}

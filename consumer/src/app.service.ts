@@ -1,7 +1,11 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { eq } from 'drizzle-orm';
-import { CreateTestPayload, UpdateTestPayload } from './app.payload';
+import {
+  CreateTestPayload,
+  DeleteTestPayload,
+  UpdateTestPayload,
+} from './app.payload';
 import { Test01, test01 } from './app.schema';
 import { DRIZZLE_PROVIDER, DrizzleMaria } from './database/drizzle.provider';
 
@@ -46,10 +50,9 @@ export class AppService {
     await this.db.update(test01).set(test).where(eq(test01.Id, test.ID));
   }
 
-  deleteTestByID(id: number): string {
-    this.rabbit.emit('test-deleted', { id: id });
-
-    return `success delete test ${id}`;
+  async deleteTestByID(body: DeleteTestPayload) {
+    const test = new DeleteTestPayload(body);
+    await this.db.delete(test01).where(eq(test01.Id, test.ID));
   }
 
   getHello(): string {

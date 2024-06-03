@@ -2,6 +2,7 @@ import { Controller, Delete, Get, Param, Query } from '@nestjs/common';
 import { EventPattern, Payload } from '@nestjs/microservices';
 import {
   CreateTestPayload,
+  DeleteTestPayload,
   PayloadTest,
   UpdateTestPayload,
 } from './app.payload';
@@ -36,10 +37,9 @@ export class AppController {
     await this.appService.updateTestByID(payload.data);
   }
 
-  @Delete('test/:id')
-  deleteTestByID(@Param('id') id: number) {
-    const resp = this.appService.deleteTestByID(id);
-    return { message: resp };
+  @EventPattern('test-deleted')
+  async deleteTestByID(@Payload() payload: PayloadTest<DeleteTestPayload>) {
+    await this.appService.deleteTestByID(payload.data);
   }
 
   @Get()

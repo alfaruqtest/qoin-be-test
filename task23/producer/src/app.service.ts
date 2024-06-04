@@ -1,11 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { CreateTestDTO, UpdateTestDTO } from './app.dto';
+import { TEST_PRODUCER } from './rabbitmq.provider';
 
 @Injectable()
 export class AppService {
   constructor(
-    @Inject('TEST_PRODUCER')
+    @Inject(TEST_PRODUCER)
     private readonly rabbit: ClientProxy,
   ) {}
 

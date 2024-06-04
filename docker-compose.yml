@@ -2,6 +2,8 @@ services:
   mariadb:
     image: mariadb:lts-noble
     container_name: qoin-db
+    volumes:
+      - ./task1/src/database/migrations:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
     environment:

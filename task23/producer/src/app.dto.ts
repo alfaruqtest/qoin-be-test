@@ -2,16 +2,16 @@ import { IsNotEmpty } from 'class-validator';
 
 export class CreateTestDTO {
   @IsNotEmpty()
-  nama: string;
+  Nama: string;
 
   @IsNotEmpty()
-  status: number;
+  Status: number;
 }
 
 export class UpdateTestDTO {
   @IsNotEmpty()
-  nama: string;
+  Nama: string;
 
   @IsNotEmpty()
-  status: number;
+  Status: number;
 }

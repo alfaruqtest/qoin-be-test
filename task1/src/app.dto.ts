@@ -3,25 +3,25 @@ import { IsNotEmpty } from 'class-validator';
 
 export class CreateTestDTO {
   @IsNotEmpty()
-  nama: string;
+  Nama: string;
 
   @IsNotEmpty()
-  status: number;
+  Status: number;
 
   @Exclude()
-  created = new Date();
+  Created = new Date();
 
   @Exclude()
-  updated = new Date();
+  Updated = new Date();
 }
 
 export class UpdateTestDTO {
   @IsNotEmpty()
-  nama: string;
+  Nama: string;
 
   @IsNotEmpty()
-  status: number;
+  Status: number;
 
   @Exclude()
-  updated = new Date();
+  Updated = new Date();
 }

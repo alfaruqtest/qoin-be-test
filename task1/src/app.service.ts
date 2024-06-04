@@ -20,7 +20,7 @@ export class AppService {
   async getTestByID(id: number): Promise<Test01> {
     if (isNaN(id)) throw new NotFoundException();
 
-    const [test] = await this.db.select().from(test01).where(eq(test01.id, id));
+    const [test] = await this.db.select().from(test01).where(eq(test01.Id, id));
     if (!test) throw new NotFoundException();
 
     return test;
@@ -42,7 +42,7 @@ export class AppService {
   async updateTestByID(id: number, body: UpdateTestDTO): Promise<string> {
     if (isNaN(id)) throw new NotFoundException();
 
-    await this.db.update(test01).set(body).where(eq(test01.id, id));
+    await this.db.update(test01).set(body).where(eq(test01.Id, id));
 
     return `success update test ${id}`;
   }
@@ -50,7 +50,7 @@ export class AppService {
   async deleteTestByID(id: number): Promise<string> {
     if (isNaN(id)) throw new NotFoundException();
 
-    await this.db.delete(test01).where(eq(test01.id, id));
+    await this.db.delete(test01).where(eq(test01.Id, id));
 
     return `success delete test ${id}`;
   }

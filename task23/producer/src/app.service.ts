@@ -12,10 +12,7 @@ export class AppService {
   createTest(body: CreateTestDTO): string {
     this.rabbit.emit('test-created', {
       command: 'create',
-      data: {
-        Nama: body.nama,
-        Status: body.status,
-      },
+      data: body,
     });
     return 'success insert new test';
   }
@@ -25,8 +22,7 @@ export class AppService {
       command: 'update',
       data: {
         ID: id,
-        Nama: body.nama,
-        Status: body.status,
+        ...body,
       },
     });
 
